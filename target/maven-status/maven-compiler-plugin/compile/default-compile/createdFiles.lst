@@ -1,0 +1,7 @@
+csvReader/CsvReader.class
+dataModels/Journey.class
+dataModels/Tap.class
+dataModels/Journey$Status.class
+AllTrips.class
+TripCalculator.class
+dataModels/TripDetail.class

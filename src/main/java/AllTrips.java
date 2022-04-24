@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AllTrips {
-
     // Read the csv
     private static final CsvReader csvReader = null;
 
@@ -26,17 +25,18 @@ public class AllTrips {
     }
 
     public static void main(String[] args) throws Exception {
-        File input = new File("src/main/java/input.csv");
-        File output = new File("output.json");
+//        File input = new File("src/main/java/input.csv");
+//        File output = new File("output.json");
 
         allTrips();
 
     }
 
     public static void allTrips() throws IOException, ParseException {
-        File input = new File("src/main/java/input.csv");
+        File input = new File("/home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/input.csv");
 
         List<Map<?, ?>> inputData = csvReader.readObjectsFromCsv(input);
+
 
         // a list of taps
         Map<String, List<Tap>> allCustomers = new HashMap<>();
@@ -55,6 +55,8 @@ public class AllTrips {
             if (allCustomers.get(PAN) == null) {
                 allCustomers.put(PAN, new ArrayList<>());
             }
+
+
             allCustomers.get(PAN).add(initTap);
 
         }
@@ -65,35 +67,74 @@ public class AllTrips {
 
 
             for (String key: allCustomers.keySet()) {
-                for (int i = 0; i < allCustomers.get(key).toArray().length -1 ; i++  ) {
-                    if (tapPair(allCustomers.get(key).get(i), allCustomers.get(key).get(i + 1))) {
-                        // this determines a tap pair.
 
-                        BigDecimal cost = TripCalculator.tripCost(allCustomers.get(key).get(i), allCustomers.get(key).get(i+1));
+                for (int i = 0; i < allCustomers.get(key).toArray().length ; i++  ) {
+                    if (i < allCustomers.get(key).toArray().length-1 ) {
+
+                        if (tapPair(allCustomers.get(key).get(i), allCustomers.get(key).get(i + 1))) {
+
+                            Journey.Status status = TripCalculator.journeyStatus(allCustomers.get(key).get(i), allCustomers.get(key).get(i + 1));
+
+                            // this determines a tap pair.
+
+                            BigDecimal cost = TripCalculator.tripCost(allCustomers.get(key).get(i), allCustomers.get(key).get(i + 1));
+//                        System.out.println(cost);
+
+                            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+                            Date tap1 = format.parse(allCustomers.get(key).get(i).getDate());
+                            Date tap2 = format.parse(allCustomers.get(key).get(i + 1).getDate());
+
+                            long duration = TripCalculator.tripDuration(tap1, tap2);
+
+                            String startTime = allCustomers.get(key).get(i).getDate();
+                            String endTime = allCustomers.get(key).get(i + 1).getDate();
+                            long durationSecs = duration;
+                            String fromStopId = allCustomers.get(key).get(i).getStopId();
+                            String toStopId = allCustomers.get(key).get(i + 1).getStopId();
+                            BigDecimal chargeAmount = cost;
+                            String companyId = allCustomers.get(key).get(i).getCompanyId();
+                            String busId = allCustomers.get(key).get(i).getBusId();
+                            String PAN = key;
+
+
+                            TripDetail trip = new TripDetail(startTime, endTime, durationSecs, fromStopId, toStopId, chargeAmount, companyId, busId, companyId, status);
+
+
+                        }
+                    } else {
+                        Journey.Status status = Journey.Status.INCOMPLETE;
+
+                        BigDecimal cost = TripCalculator.tripCost(allCustomers.get(key).get(i), null);
 //                        System.out.println(cost);
 
                         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
                         Date tap1 = format.parse(allCustomers.get(key).get(i).getDate());
-                        Date tap2 = format.parse(allCustomers.get(key).get(i+1).getDate());
 
-                        long duration = TripCalculator.tripDuration(tap1, tap2);
+                        long duration = 0;
 
                         String startTime = allCustomers.get(key).get(i).getDate();
-                        String endTime = allCustomers.get(key).get(i+1).getDate();
+                        String endTime = null;
                         long durationSecs = duration;
                         String fromStopId = allCustomers.get(key).get(i).getStopId();
-                        String toStopId = allCustomers.get(key).get(i+1).getStopId();
+                        String toStopId = null;
                         BigDecimal chargeAmount = cost;
                         String companyId = allCustomers.get(key).get(i).getCompanyId();
                         String busId = allCustomers.get(key).get(i).getBusId();
                         String PAN = key;
-                        Journey.Status status = Journey.Status.COMPLETE;
 
-                        TripDetail trip = new TripDetail(startTime,endTime,durationSecs,fromStopId,toStopId, chargeAmount, companyId, busId, companyId, status);
+
+                        TripDetail trip = new TripDetail(startTime, endTime, durationSecs, fromStopId, toStopId, chargeAmount, companyId, busId, companyId, status);
+
+
+
 
 
                     }
+                    // if false, then there is no tap pair
+
+
                 }
             }
 
