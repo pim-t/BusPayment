@@ -1,7 +1,6 @@
 package dataModels;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 
 public class TripDetail {
@@ -11,7 +10,7 @@ public class TripDetail {
     private long durationSecs;
     private String fromStopId;
     private String toStopId;
-    private BigDecimal chargeAmount;
+    private double chargeAmount;
     private String companyId;
     private String busId;
     private String PAN;
@@ -23,7 +22,7 @@ public class TripDetail {
                       long durationSecs,
                       String fromStopId,
                       String toStopId,
-                      BigDecimal chargeAmount,
+                      double chargeAmount,
                       String companyId,
                       String busId,
                       String PAN,
@@ -41,7 +40,7 @@ public class TripDetail {
     }
 
 
-    public void setChargeAmount(BigDecimal chargeAmount) {
+    public void setChargeAmount(double chargeAmount) {
         this.chargeAmount = chargeAmount;
     }
 
@@ -65,7 +64,7 @@ public class TripDetail {
         return toStopId;
     }
 
-    public BigDecimal getChargeAmount() {
+    public double getChargeAmount() {
         return chargeAmount;
     }
 
