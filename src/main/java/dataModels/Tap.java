@@ -1,55 +1,22 @@
 package dataModels;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
+import java.time.LocalDateTime;
 
-public class Tap {
-
-    private String id;
-    private String date;
-    private String stopId;
-    private String companyId;
-    private String busId;
-    private String PAN;
-
-    private String tapType;
-
-    public Tap( String id, String date, String stopId, String companyId, String busId, String PAN, String tapType){
-        this.id = id;
-        this.date = date;
-        this.stopId = stopId;
-        this.companyId = companyId;
-        this.busId = busId;
-        this.PAN = PAN;
-        this.tapType = tapType;
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getStopId() {
-        return stopId;
-    }
-
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public String getBusId() {
-        return busId;
-    }
-
-    public String getPAN() {
-        return PAN;
-    }
-
-    public String getTapType() {
-        return tapType;
-    }
+@JsonPropertyOrder({"id", "dateTime", "tapType", "stopId", "companyId", "busId", "pan"})
+public record Tap(
+        String id,
+        @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+        @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+        LocalDateTime dateTime,
+        String tapType,
+        String stopId,
+        String companyId,
+        String busId,
+        String pan
+) {
 }

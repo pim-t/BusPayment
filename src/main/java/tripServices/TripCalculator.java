@@ -1,65 +1,52 @@
 package tripServices;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import dataModels.Journey;
+import dataModels.Status;
 import dataModels.Tap;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.temporal.ChronoUnit;
 
 public class TripCalculator {
 
-
-    public static long tripDuration(Tap tapOn, @Nullable Tap tapOff) throws ParseException {
+    public static long tripDuration(Tap tapOn, @Nullable Tap tapOff) {
         if (tapOff == null) {
             return 0;
         }
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date tap1 = format.parse(tapOn.getDate());
-        Date tap2 = format.parse(tapOff.getDate());
-        return (tap2.getTime() - tap1.getTime())/1000;
+        return ChronoUnit.SECONDS.between(tapOn.dateTime(), tapOff.dateTime());
     }
 
-    public static Journey.Status journeyStatus(Tap tapOn, @Nullable Tap tapOff) {
+    public static Status journeyStatus(Tap tapOn, @Nullable Tap tapOff) {
         if (tapOff == null || tapOn == null) {
-            return  Journey.Status.INCOMPLETE;
+            return Status.INCOMPLETE;
         }
-        if (tapOn.getId() == tapOff.getId()) {
-            return Journey.Status.CANCELLED;
+        if (tapOn.id().equals( tapOff.id())) {
+            return Status.CANCELLED;
         }
-        return Journey.Status.COMPLETE;
+        return Status.COMPLETE;
     }
-
 
     public static double tripCost(Tap tapOne, @Nullable Tap tapTwo) {
 
         if (tapTwo == null) {
-            if (tapOne.getStopId().equals("Stop1") || tapOne.getStopId().equals("Stop3")) {
+            if (tapOne.stopId().equals("Stop1") || tapOne.stopId().equals("Stop3")) {
                 return 7.30;
             }
-            if (tapOne.getStopId().equals("Stop2")) {
+            if (tapOne.stopId().equals("Stop2")) {
                 return 5.50;
             }
 
         } else {
 
-            if (tapTwo.getStopId().equals("Stop2") && tapOne.getStopId().equals("Stop1")) {
+            if (tapTwo.stopId().equals("Stop2") && tapOne.stopId().equals("Stop1")) {
                 return 3.35;
             }
-            if (tapTwo.getStopId().equals("Stop3") && tapOne.getStopId().equals("Stop1")) {
+            if (tapTwo.stopId().equals("Stop3") && tapOne.stopId().equals("Stop1")) {
                 return 7.30;
             }
-            if (tapTwo.getStopId().equals("Stop2") && tapOne.getStopId().equals("Stop3")) {
+            if (tapTwo.stopId().equals("Stop2") && tapOne.stopId().equals("Stop3")) {
                 return 5.50;
             }
         }
         return 0;
     }
-
-
-
-
 }
