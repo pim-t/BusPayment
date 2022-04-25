@@ -36,7 +36,8 @@ public class CsvReader {
         return mappingIterator.readAll();
     }
 
-    public static void writeCSV(TripDetail trip, File file) throws IOException {
+    public static void writeCSV(List trips) throws IOException {
+        File file = new File("output.csv");
         CsvMapper mapper= new CsvMapper();
         CsvSchema schema = mapper.schemaFor(TripDetail.class);
         schema = schema.withColumnSeparator(',');
@@ -48,7 +49,12 @@ public class CsvReader {
         FileOutputStream tempFileOutputStream = new FileOutputStream(file);
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(tempFileOutputStream, 1024);
         OutputStreamWriter writerOutputStream = new OutputStreamWriter(bufferedOutputStream, "UTF-8");
-        myObjectWriter.writeValue(writerOutputStream, trip);
+
+        ObjectWriter writer = mapper.writerFor(TripDetail.class).with(schema);
+
+        writer.writeValues(file).writeAll(trips);
+
+
 
 
 

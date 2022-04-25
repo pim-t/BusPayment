@@ -1,5 +1,6 @@
-/home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/AllTrips.java
-/home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/TripCalculator.java
+/home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/Application.java
+/home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/tripServices/TripCalculator.java
+/home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/tripServices/AllTrips.java
 /home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/csvReader/CsvReader.java
 /home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/dataModels/TripDetail.java
 /home/pim/Documents/GitHub/BusPayment/BusPayment/src/main/java/dataModels/Tap.java

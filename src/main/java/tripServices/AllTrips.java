@@ -48,28 +48,27 @@ public class AllTrips {
     }
 
 
-    public static void tripCreator(Map<String, List<Tap>> allCustomers) throws ParseException, IOException {
-            File tempFile = new File("trips.csv");
+    public static List tripCreator(Map<String, List<Tap>> allCustomers) throws ParseException, IOException {
+            List tripCosts = new ArrayList();
             for (String key: allCustomers.keySet()) {
                 TripDetail currentTrip = null;
                 for (int i = 0; i < allCustomers.get(key).toArray().length-1 ; i=+2  ) {
                     if ((i+1) < allCustomers.get(key).toArray().length ) {
                         if (tapPair(allCustomers.get(key).get(i), allCustomers.get(key).get(i + 1))) {
                            currentTrip = tripPair(allCustomers.get(key).get(i), allCustomers.get(key).get(i + 1), key);
+
                         }
                     } else {
                         currentTrip = tripPair(allCustomers.get(key).get(i), null, key);
-
-
                     }
+                    tripCosts.add(currentTrip);
 
-                    CsvReader.writeCSV(currentTrip,tempFile);
                     // if false, then there is no tap pair
 
 
                 }
             }
-
+        return tripCosts;
     }
 
 
