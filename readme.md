@@ -1,4 +1,4 @@
-Hello! Thanks for having a look at this :D
+Hello! Thanks for having a look at this :D - Written by Pim. 
 
 ## Run instructions
 
