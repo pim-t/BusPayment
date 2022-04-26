@@ -1,7 +1,0 @@
-io/CsvIO.class
-tripServices/TripCalculator.class
-dataModels/Tap.class
-dataModels/Status.class
-Application.class
-dataModels/Trip.class
-tripServices/AllTrips.class
