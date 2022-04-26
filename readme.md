@@ -1,6 +1,8 @@
+Hello! Thanks for having a look at this :D
+
 ## Run instructions
 
-Requirements: Java 17, Maven 3.8.5. 
+Requirements - Java 17, Maven 3.8.5. 
 
 Run `mvn clean install` in the project directory. 
 

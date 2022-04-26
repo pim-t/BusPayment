@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvIO {
-
     public static List<Tap> readTapsFromCsv(File inputFile) throws IOException {
         var csvMapper = new CsvMapper();
 

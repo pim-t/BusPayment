@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AllTripsTest {
+class AllTripsHandlerTest {
 
     // I acknowledge this was not a good idea - but here's test cases
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -45,9 +45,9 @@ class AllTripsTest {
         List<Tap> emptyTap = new ArrayList<>();
         List<Trip> emptyTrip = new ArrayList<>();
 
-        assertAll ( () -> assertEquals(tripListOneCustomer, AllTrips.convertTapsToTrips(tapListOneCustomer)),
-                () -> assertEquals(tripListTwoCustomers, AllTrips.convertTapsToTrips(tapListTwoCustomers)), // two customers
-                () -> assertEquals(emptyTrip, AllTrips.convertTapsToTrips(emptyTap)) // empty list
+        assertAll ( () -> assertEquals(tripListOneCustomer, AllTripsHandler.convertTapsToTrips(tapListOneCustomer)),
+                () -> assertEquals(tripListTwoCustomers, AllTripsHandler.convertTapsToTrips(tapListTwoCustomers)), // two customers
+                () -> assertEquals(emptyTrip, AllTripsHandler.convertTapsToTrips(emptyTap)) // empty list
         );
 
     }
@@ -55,17 +55,17 @@ class AllTripsTest {
     @Test
     void calculateTripFromTapPair() {
 
-        assertAll ( () -> assertEquals(trip1Customer1, AllTrips.calculateTripFromTapPair(tap1Customer1, tap2Customer1)), // okay trip
-                () -> assertEquals(trip2Customer1, AllTrips.calculateTripFromTapPair(tap1Customer1, tap3Customer1)), // cancelled trip
-                () -> assertEquals(trip3Customer1, AllTrips.calculateTripFromTapPair(tap4Customer1, null)) // incomplete
+        assertAll ( () -> assertEquals(trip1Customer1, AllTripsHandler.calculateTripFromTapPair(tap1Customer1, tap2Customer1)), // okay trip
+                () -> assertEquals(trip2Customer1, AllTripsHandler.calculateTripFromTapPair(tap1Customer1, tap3Customer1)), // cancelled trip
+                () -> assertEquals(trip3Customer1, AllTripsHandler.calculateTripFromTapPair(tap4Customer1, null)) // incomplete
         );
     }
 
     @Test
     void isTapPair() {
-        assertAll ( () -> assertEquals(true, AllTrips.isTapPair(tap1Customer1, tap2Customer1)),
-                () -> assertEquals(true, AllTrips.isTapPair(tap1Customer1, tap3Customer1)),
-                () -> assertEquals(false, AllTrips.isTapPair(tap2Customer1, tap3Customer1))
+        assertAll ( () -> assertEquals(true, AllTripsHandler.isTapPair(tap1Customer1, tap2Customer1)),
+                () -> assertEquals(true, AllTripsHandler.isTapPair(tap1Customer1, tap3Customer1)),
+                () -> assertEquals(false, AllTripsHandler.isTapPair(tap2Customer1, tap3Customer1))
         );
     }
 }

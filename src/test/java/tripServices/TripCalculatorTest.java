@@ -2,12 +2,9 @@ package tripServices;
 
 import dataModels.Status;
 import dataModels.Tap;
-import dataModels.Trip;
 import org.junit.jupiter.api.Test;
-import tripServices.TripCalculator;
 
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

@@ -1,6 +1,6 @@
 import dataModels.Tap;
 import io.CsvIO;
-import tripServices.AllTrips;
+import tripServices.AllTripsHandler;
 
 import java.io.File;
 import java.util.List;
@@ -12,11 +12,11 @@ public class Application {
         if (args.length > 0) {
             inputFile = new File(args[0]);
         }
-
-        File outputFile = new File("/outputs/output.csv");
+        // improvements to this can also be made
+        File outputFile = new File("output.csv");
 
         List<Tap> taps = CsvIO.readTapsFromCsv(inputFile);
-        var trips = AllTrips.convertTapsToTrips(taps);
+        var trips = AllTripsHandler.convertTapsToTrips(taps);
         CsvIO.writeTripsToCsv(outputFile, trips);
     }
 }

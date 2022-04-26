@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AllTrips {
-
+public class AllTripsHandler {
     public static List<Trip> convertTapsToTrips(List<Tap> taps) {
         // map of open trips by PAN
         HashMap<String, Tap> mapOfPanToOpenTrip = new HashMap<>();
@@ -24,10 +23,10 @@ public class AllTrips {
                 // find the matching tap pair, if it exists
                 Tap currentTapOn = mapOfPanToOpenTrip.get(currentTap.pan());
                 if (isTapPair(currentTapOn, currentTap)) {
-                    // if it exists, remove the current tap from open trips
-                    mapOfPanToOpenTrip.remove(currentTap.pan());
                     // and add current tap to complete trips
                     allTripTypes.add(calculateTripFromTapPair(currentTapOn, currentTap));
+                    // if it exists, remove the current tap from open trips
+                    mapOfPanToOpenTrip.remove(currentTap.pan());
                 } else {
                     mapOfPanToOpenTrip.put(currentTap.pan(), currentTap);
                 }
