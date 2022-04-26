@@ -1,8 +1,7 @@
-csvReader/CsvReader.class
-dataModels/Journey.class
+io/CsvIO.class
 tripServices/TripCalculator.class
 dataModels/Tap.class
-dataModels/Journey$Status.class
+dataModels/Status.class
 Application.class
-dataModels/TripDetail.class
+dataModels/Trip.class
 tripServices/AllTrips.class

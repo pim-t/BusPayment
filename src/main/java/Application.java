@@ -5,10 +5,15 @@ import tripServices.AllTrips;
 import java.io.File;
 import java.util.List;
 
+
 public class Application {
     public static void main(String[] args) throws Exception {
-        File inputFile = new File("BusPayment/input.csv");
-        File outputFile = new File("BusPayment/output.csv");
+        File inputFile = new File("BusPayment/inputs/input.csv");
+        if (args.length > 0) {
+            inputFile = new File(args[0]);
+        }
+
+        File outputFile = new File("/outputs/output.csv");
 
         List<Tap> taps = CsvIO.readTapsFromCsv(inputFile);
         var trips = AllTrips.convertTapsToTrips(taps);

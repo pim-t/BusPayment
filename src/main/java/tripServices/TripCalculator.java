@@ -19,7 +19,7 @@ public class TripCalculator {
         if (tapOff == null || tapOn == null) {
             return Status.INCOMPLETE;
         }
-        if (tapOn.id().equals( tapOff.id())) {
+        if (tapOn.stopId().equals(tapOff.stopId())) {
             return Status.CANCELLED;
         }
         return Status.COMPLETE;
@@ -38,7 +38,7 @@ public class TripCalculator {
         } else {
 
             if (tapTwo.stopId().equals("Stop2") && tapOne.stopId().equals("Stop1")) {
-                return 3.35;
+                return 3.25;
             }
             if (tapTwo.stopId().equals("Stop3") && tapOne.stopId().equals("Stop1")) {
                 return 7.30;
