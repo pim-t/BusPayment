@@ -13,7 +13,7 @@ Run `java -jar target/BusPayment-1.0-SNAPSHOT-jar-with-dependencies.jar [input f
 If running from IDE (such as IntelliJ)
 1. Add input file at BusPayment/inputs/input.csv
 2. Run application file.
-3. Check output in output.csv
+3. Check output in trips.csv
 
 ## Test Cases
 
