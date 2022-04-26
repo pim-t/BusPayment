@@ -13,7 +13,7 @@ public class Application {
             inputFile = new File(args[0]);
         }
         // improvements to this can also be made
-        File outputFile = new File("output.csv");
+        File outputFile = new File("trips.csv");
 
         List<Tap> taps = CsvIO.readTapsFromCsv(inputFile);
         var trips = AllTripsHandler.convertTapsToTrips(taps);
